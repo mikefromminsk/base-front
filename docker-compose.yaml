@@ -4,11 +4,9 @@ services:
     image: webdevops/php-apache:7.4
     restart: always
     ports:
-      - "${APP_PORT:-8080}:80"
+      - "8080:80"
     volumes:
       - ./app:/app
-    environment:
-      - APP_DEBUG=${APP_DEBUG:-1}
     networks:
       - app
 
