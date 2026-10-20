@@ -1,10 +1,15 @@
 ## Как запустить
 
+1. Скачать и установить [Docker Desktop](https://www.docker.com/products/docker-desktop/),
+   затем запустить его.
+2. Перейти в папку проекта и выполнить:
+
 ```bash
+cd base-front
 docker compose up -d
 ```
 
-Открыть <http://localhost:8080>.
+3. Открыть страницу <http://localhost:8080>.
 
 ## Что внутри
 
