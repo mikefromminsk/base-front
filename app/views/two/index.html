@@ -1,0 +1,19 @@
+<div class="flex col">
+    <div class="row acc ph16 pv8 gap8">
+        <div class="flex text3">Страница два</div>
+    </div>
+
+    <div class="flex col scroll p16 gap8">
+        <div class="row acc p16 r16 back-gray100 gap8"
+             ng-repeat="item in items track by item.id">
+            <div class="r100 avatar"
+                 ng-style="{'background-color': stringToColor(item.title)}">
+                <img class="img-white img20 m4" src="icon/avatar.svg">
+            </div>
+            <div class="flex col gap4">
+                <div class="text4">{{item.title}}</div>
+                <div class="text5 text-gray">{{item.subtitle}}</div>
+            </div>
+        </div>
+    </div>
+</div>

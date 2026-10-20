@@ -1,0 +1,58 @@
+@keyframes ripple-click {
+    0% {
+        background-color: var(--gray100);
+        transform: translateY(1px) scale(0.98);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    100% {
+        background-color: transparent;
+        transform: translateY(0) scale(1);
+        box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+
+.ripple {
+    position: relative;
+}
+
+.ripple:active {
+    animation: ripple-click 0.4s ease-out forwards;
+}
+
+@keyframes opacity-animation {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.anim {
+    animation: opacity-animation 1s ease both;
+}
+
+.ng-leave.anim,
+.ng-leave.anim {
+    animation: none !important;
+    transition: none !important;
+}
+
+@keyframes height-animation {
+    0% {
+        opacity: 0;
+        max-height: 0;
+    }
+    100% {
+        opacity: 1;
+        max-height: 400px;
+    }
+}
+.anim-height {
+    animation: height-animation 1s ease both;
+}
+
+.d01 { animation-delay: 0.1s }
+.d03 { animation-delay: 0.3s }
+.d05 { animation-delay: 0.5s }
+.d1 { animation-delay: 1s }
+.d15 { animation-delay: 1.5s }
+.d2 { animation-delay: 2s }
+.d25 { animation-delay: 2.5s }
+.d3 { animation-delay: 3s }
+

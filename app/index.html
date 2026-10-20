@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Шаблон</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="icon/logo.svg">
+
+    <link rel="stylesheet" href="utils/css/colors-theme.css">
+    <link rel="stylesheet" href="utils/css/colors.css">
+    <link rel="stylesheet" href="utils/css/base.css">
+    <link rel="stylesheet" href="utils/css/animation.css">
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="utils/css/style.css">
+    <link rel="stylesheet" href="utils/css/shorts.css">
+
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-material/angular-material.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+
+    <script src="app.js"></script>
+
+    <script src="utils/js/api.js"></script>
+    <script src="utils/js/material.js"></script>
+    <script src="controller.js"></script>
+    <script src="views/one/controller.js"></script>
+    <script src="views/two/controller.js"></script>
+    <script src="views/dialog/controller.js"></script>
+    <script src="views/sheet/controller.js"></script>
+</head>
+
+<body class="col back-black text-white fill" ng-app="app" ng-controller="main">
+
+<div class="row acc ph16 pv16 gap8 header">
+    <img class="img-white img24" src="icon/logo.svg">
+    <div class="flex text3">Шаблон</div>
+    <button class="button2" ng-click="openPage('one')">Страница один</button>
+    <button class="button2" ng-click="openPage('two')">Страница два</button>
+    <button class="button2" ng-click="openDialog($event)">Диалог</button>
+    <button class="button2" ng-click="openSheet($event)">Лист</button>
+</div>
+
+<div ui-view class="flex col"></div>
+
+</body>
+</html>

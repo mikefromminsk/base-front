@@ -1,0 +1,13 @@
+{
+  "name": "base-front",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Минимальный шаблон AngularJS-приложения: роутер, две страницы, модальное окно и статические json-данные",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.1.2",
+    "angular": "^1.8.2",
+    "angular-animate": "^1.8.2",
+    "angular-aria": "^1.8.2",
+    "angular-material": "^1.2.5"
+  }
+}

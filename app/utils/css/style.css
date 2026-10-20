@@ -1,0 +1,106 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('/utils/fonts/Inter_18pt-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, button, input, textarea, select {
+    font-family: 'Inter', monospace !important;
+}
+
+.text0 {
+    font-size: 50px;
+    line-height: 55px;
+    font-weight: bold;
+}
+
+.text1 {
+    text-wrap: wrap;
+    font-size: 32px;
+    line-height: 39px;
+    font-weight: 500;
+}
+
+.text2 {
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: 300;
+}
+
+.text3 {
+    font-size: 20px;
+    line-height: 29px;
+    font-weight: 300;
+}
+
+.text4 {
+    font-size: 16px;
+    line-height: 29px;
+    font-weight: 300;
+}
+
+.text5 {
+    font-size: 12px;
+    line-height: 29px;
+    font-weight: 300;
+}
+
+.avatar {
+    overflow: hidden;
+}
+
+.header {
+    border-bottom: 1px solid var(--gray200);
+}
+
+.dialog {
+    background-color: var(--black);
+    color: var(--white);
+    min-width: 100px;
+    min-height: 100px;
+    flex: 1;
+}
+
+md-bottom-sheet {
+    background-color: var(--black);
+    color: var(--white);
+    border-top-width: 0;
+    box-shadow: 4px 0 4px rgba(255, 255, 255, 0.1);
+    z-index: 100;
+}
+
+md-backdrop.md-bottom-sheet-backdrop {
+    z-index: 99;
+}
+
+.sheet {
+    gap: 16px;
+    padding-top: 8px;
+}
+
+.md-toast-content {
+    text-wrap: auto;
+    line-height: 18px;
+}
+
+.green-toast .md-toast-content {
+    background: var(--green) !important;
+}
+
+.red-toast .md-toast-content {
+    background: var(--red) !important;
+}
+
+@media (max-width: 660px) {
+    .red-toast, .green-toast {
+        bottom: 0 !important;
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+}
+
+*[md-ink-ripple] {
+    position: relative;
+}

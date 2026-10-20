@@ -1,0 +1,14 @@
+<md-bottom-sheet>
+    <div class="col gap8 sheet">
+        <div class="row acc ph16 pv8 gap8">
+            <div class="flex text3">Лист</div>
+            <img class="img-white img24 ripple" src="icon/close.svg" ng-click="close()">
+        </div>
+
+        <div class="row acc p16 r16 back-gray100 gap8"
+             ng-repeat="item in items track by item.id">
+            <div class="flex text4">{{item.title}}</div>
+            <div class="text5 text-gray">{{item.subtitle}}</div>
+        </div>
+    </div>
+</md-bottom-sheet>

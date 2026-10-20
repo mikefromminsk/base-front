@@ -1,0 +1,15 @@
+<div class="dialog flex col">
+    <div class="row acc ph16 pv8 gap8">
+        <div class="flex text3">{{dialog.title}}</div>
+        <img class="img-white img24 ripple" src="icon/close.svg" ng-click="close()">
+    </div>
+
+    <div class="flex col scroll p16 gap8">
+        <div class="col gap4 p16 r16 back-gray100"
+             ng-repeat="item in items track by item.id">
+            <div class="text5 text-gray">{{item.title}}</div>
+            <div class="text4">{{item.text}}</div>
+            <div class="text5 text-gray">{{formatTime(item.timestamp)}}</div>
+        </div>
+    </div>
+</div>
