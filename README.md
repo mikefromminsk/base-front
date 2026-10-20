@@ -29,7 +29,45 @@ base-front/
     └── views/          папки с экранами
 ```
 
-## Как делается запрос
+
+## Как добавить страницу
+
+1. Создать `app/views/<name>/index.html` и `app/views/<name>/controller.js`.
+2. Добавить state в `app/app.js`:
+
+```js
+.state('<name>', {
+    url: '/<name>',
+    templateUrl: 'views/<name>/index.html',
+    controller: '<name>',
+})
+```
+
+3. Добавить кнопку:
+
+```html
+<button class="button2" ui-sref="<name>">Заголовок</button>
+```
+
+
+
+## Диалоги
+
+Фабрики `dialog` и `sheet` из `app/utils/js/material.js`. Аргументы
+одинаковые: контроллер, папка с шаблоном, данные, событие.
+
+```js
+$scope.openDialog = function ($event) {
+    dialog('dialog', 'views/dialog', {id: 1}, $event).catch(function () {
+    })
+}
+$scope.openSheet = function ($event) {
+    sheet('sheet', 'views/sheet', {}, $event).catch(function () {
+    })
+}
+```
+
+## GET и POST запросы
 
 Сервис `api` это более удобная обёртка над $http для GET и POST запросов.
 
@@ -49,42 +87,6 @@ POST отличается только передачей параметров:
 api.post('api/data.json', {title: 'Новый пункт'}).then(function (result) {
     $scope.info = result.info
 })
-```
-
-
-## Окна: диалог и лист
-
-Фабрики `dialog` и `sheet` из `app/utils/js/material.js`. Аргументы
-одинаковые: контроллер, папка с шаблоном, данные, событие.
-
-```js
-$scope.openDialog = function ($event) {
-    dialog('dialog', 'views/dialog', {id: 1}, $event).catch(function () {
-    })
-}
-$scope.openSheet = function ($event) {
-    sheet('sheet', 'views/sheet', {}, $event).catch(function () {
-    })
-}
-```
-
-## Как добавить страницу
-
-1. Создать `app/views/<name>/index.html` и `app/views/<name>/controller.js`.
-2. Добавить state в `app/app.js`:
-
-```js
-.state('<name>', {
-    url: '/<name>',
-    templateUrl: 'views/<name>/index.html',
-    controller: '<name>',
-})
-```
-
-3. Добавить кнопку:
-
-```html
-<button class="button2" ui-sref="<name>">Заголовок</button>
 ```
 
 
