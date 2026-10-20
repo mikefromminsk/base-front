@@ -1,40 +1,28 @@
 ## Как запустить
 
-Первый блок — зависимости, нужен один раз:
-
-```bash
-cd app
-npm install
-```
-
-Второй блок — запуск:
-
 ```bash
 docker compose up -d
 ```
 
 Открыть <http://localhost:8080>.
 
-`npm install` обязателен — `index.html` берёт angular из `node_modules`.
-Без Docker: `php -S localhost:8080 -t app`.
-
 ## Что внутри
 
 ```
-app/
-├── index.html      вход: стили, скрипты, шапка, ui-view
-├── app.js          модуль, роутер, хелперы
-├── controller.js   openPage, openDialog, openSheet
-├── api/data.json   данные для экранов
-├── utils/js/       api.js (запросы), material.js (toast, dialog, sheet)
-├── utils/css/      цвета, база, утилиты
-├── utils/fonts/    шрифт Inter
-├── icon/           svg-иконки
-└── views/          one, two, dialog, sheet
+base-front/
+├── docker-compose.yaml
+└── app/
+    ├── app.js          настройки приложения
+    ├── index.html      главная верстка
+    ├── controller.js   главная контроллер
+    ├── api/            папка для api
+    ├── icon/           набор базовых иконок
+    ├── utils/
+    │   ├── js/         утилиты для JavaScript
+    │   ├── css/        стили
+    │   └── fonts/      шрифты
+    └── views/          папки с экранами
 ```
-
-Экран — папка в `views/` с `index.html` и `controller.js`. Остальное
-переиспользуемое.
 
 ## Как делается запрос
 
@@ -50,7 +38,7 @@ $scope.reload = function () {
 $scope.reload()
 ```
 
-POST отличается только передачей праметров:
+POST отличается только передачей параметров:
 
 ```js
 api.post('api/data.json', {title: 'Новый пункт'}).then(function (result) {
@@ -59,21 +47,10 @@ api.post('api/data.json', {title: 'Новый пункт'}).then(function (resul
 ```
 
 
-## Вёрстка
+## Окна: диалог и лист
 
-Классы — сокращения из набора утилит `app/utils/css/shorts.css` (по мотивам
-Tailwind), цвета — из `colors.css`, окна и тосты — из Angular Material.
-
-`p16`/`ph16`/`pv16` — отступы, `m16` — внешний отступ, `gap8` — расстояние
-между элементами, `r16` — скругление, `img24` — размер картинки, `text4` —
-размер шрифта, `acc` — выравнивание по центру, `back-gray100` — цвет,
-`row`/`col`/`flex` — раскладка.
-
-Полный список — в `shorts.css` и `colors.css`.
-
-## Диалоги на весь экран и снизу экрана
-
-Фабрики `dialog` и `sheet` из `app/utils/js/material.js` упрощают вызов диалогов.
+Фабрики `dialog` и `sheet` из `app/utils/js/material.js`. Аргументы
+одинаковые: контроллер, папка с шаблоном, данные, событие.
 
 ```js
 $scope.openDialog = function ($event) {
@@ -89,8 +66,7 @@ $scope.openSheet = function ($event) {
 ## Как добавить страницу
 
 1. Создать `app/views/<name>/index.html` и `app/views/<name>/controller.js`.
-2. Положить данные в `app/api/data.json` отдельным ключом.
-3. Добавить state в `app/app.js`:
+2. Добавить state в `app/app.js`:
 
 ```js
 .state('<name>', {
@@ -100,8 +76,34 @@ $scope.openSheet = function ($event) {
 })
 ```
 
-4. Подключить контроллер в `app/index.html` и кнопку в шапку:
+3. Добавить кнопку:
 
 ```html
-<button class="button2" ng-click="openPage('<name>')">Заголовок</button>
+<button class="button2" ui-sref="<name>">Заголовок</button>
 ```
+
+
+
+## Вёрстка
+
+Классы — сокращения из набора утилит `app/utils/css/shorts.css` (по мотивам
+Tailwind), цвета — из `colors.css`.
+
+| Что                      | Классы                                                                              |
+|--------------------------|-------------------------------------------------------------------------------------|
+| Направление              | `.col` `.row`                                                                       |
+| Растянуть по направлению | `.flex`                                                                             |
+| Выравнивание             | `.a[s,c,e][s,c,e]` s=start c=center е=end                                           |
+| Цвет фона                | `.back-[Цвет]` цвета=black,white,red,green,blue,accent,gray[50,100,200,300,400,500] |
+| Цвет текста              | `.text-[Цвет]`                                                                      |
+| Цвет границ              | `.border-[Цвет]`                                                                    |
+| Отступы внутренний       | `.p[0,2,4,8,16,32]`                                                                 |
+| Отступы внешний          | `.m[0,2,4,8,16,32]`                                                                 |
+| Промежутки               | `.gap[0,2,4,8,16,32]`                                                               |
+| Скругление углов         | `.r[0,2,4,8,16,32]`                                                                 |
+| Стили текста             | `.regular` `.medium` `.bold` `.text-ac` `.text-fill`                                |
+| Размеры картинок         | `.img[размер кратный 2 и 10]`                                                       |
+| Цвет svg картинок        | `.img-[Цвет]`                                                                       |
+| Позиционирование         | `.relative` `.absolute` `.top` `.bottom` `.left` `.right`                           |
+| Прокрутка                | `.scroll` `.scroll-disabled` `.scroll-horizontal` `.scroll-vertical`                |
+| Адаптивная верстка       | `.hide` `.show`  `.mob-show` `.mob-hide` `.mob-col` `.mob-col-reverse`              |

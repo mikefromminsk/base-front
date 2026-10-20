@@ -1,8 +1,4 @@
-app.controller('main', function ($scope, $state, dialog, sheet) {
-
-    $scope.openPage = function (page) {
-        $state.go(page)
-    }
+app.controller('main', function ($scope, dialog, sheet) {
 
     $scope.openDialog = function ($event) {
         dialog('dialog', 'views/dialog', {id: 1}, $event).catch(function () {
