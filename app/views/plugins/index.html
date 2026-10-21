@@ -1,0 +1,18 @@
+<div class="dialog flex col">
+    <div class="row acc ph16 pv8 gap8">
+        <div class="flex text3">Плагины</div>
+        <img class="img-white img24 ripple" src="icon/close.svg" ng-click="close()">
+    </div>
+
+    <div class="flex col scroll p16 gap8">
+        <div class="text5 text-gray">Галочка ставит плагин в список, страница перезагружается и плагин включается</div>
+
+        <div class="row acc ph16 pv8 r16 back-gray100 gap8"
+             ng-repeat="item in items track by item.name">
+            <div class="flex text4">{{item.name}}</div>
+            <input type="checkbox" ng-model="item.enabled" ng-change="toggle(item)">
+        </div>
+
+        <div class="text5 text-gray" ng-if="!items.length">Папок в app/plugins нет</div>
+    </div>
+</div>

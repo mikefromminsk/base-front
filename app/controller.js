@@ -9,4 +9,9 @@ app.controller('main', function ($scope, dialog, sheet) {
         sheet('sheet', 'views/sheet', {}, $event).catch(function () {
         })
     }
+
+    $scope.openPlugins = function ($event) {
+        dialog('plugins', 'views/plugins', {}, $event).catch(function () {
+        })
+    }
 })

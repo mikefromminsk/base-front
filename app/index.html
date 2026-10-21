@@ -29,9 +29,10 @@
     <script src="views/two/controller.js"></script>
     <script src="views/dialog/controller.js"></script>
     <script src="views/sheet/controller.js"></script>
+    <script src="views/plugins/controller.js"></script>
 </head>
 
-<body class="col back-black text-white fill" ng-app="app" ng-controller="main">
+<body class="col back-black text-white fill" ng-controller="main">
 
 <div class="row acc ph16 pv16 gap8 header">
     <img class="img-white img24" src="icon/logo.svg">
@@ -40,9 +41,12 @@
     <button class="button2" ui-sref="two">Страница два</button>
     <button class="button2" ng-click="openDialog($event)">Диалог</button>
     <button class="button2" ng-click="openSheet($event)">Лист</button>
+    <button class="button2" ng-click="openPlugins($event)">Плагины</button>
+    <button class="button2" ui-sref="{{name}}" ng-repeat="name in plugins">{{name}}</button>
 </div>
 
 <div ui-view class="flex col"></div>
 
+<script src="utils/js/plugins.js"></script>
 </body>
 </html>
