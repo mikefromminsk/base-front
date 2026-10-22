@@ -39,7 +39,7 @@ app.service('plugins', function () {
 
 app.config(function ($stateProvider) {
     pluginList().filter(function (item) {
-        return item.page !== false
+        return !$stateProvider.stateRegistry.get(item.name)
     }).forEach(function (item) {
         $stateProvider.state(item.name, {
             url: '/' + item.name,
@@ -51,6 +51,7 @@ app.config(function ($stateProvider) {
 })
 
 pluginList().forEach(function (item) {
+    if (document.querySelector('script[src="' + pluginUrl(item, 'controller.js') + '"]')) return
     document.write('<link rel="stylesheet" href="' + pluginUrl(item, 'style.css') + '">')
     document.write('<script src="' + pluginUrl(item, 'controller.js') + '"></script>')
 })
