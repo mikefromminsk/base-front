@@ -8,10 +8,11 @@
         <input ng-model="query" ng-change="search(query)" placeholder="Поиск">
 
         <div class="row acc p16 r16 back-gray100 gap8"
-             ng-repeat="item in items track by item.name">
-            <div class="flex col">
+             ng-repeat="item in pluginList track by item.name">
+            <div class="flex col gap4">
                 <div class="text4">{{item.title}}</div>
                 <div class="text5 text-gray">{{item.name}}</div>
+                <div class="text5 text-gray" ng-if="item.description">{{item.description}}</div>
             </div>
             <input type="checkbox" ng-checked="plugins.has(item.name)" ng-click="toggle(item)">
         </div>

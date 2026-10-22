@@ -1,6 +1,0 @@
-[
-    {"name": "notes", "title": "Заметки", "path": "views/notes", "version": "1.0", "style": false},
-    {"name": "hello", "title": "Привет", "path": "views/hello", "version": "1.0"},
-    {"name": "money", "title": "Деньги", "path": "views/money", "version": "1.0", "style": false, "page": false},
-    {"name": "shop", "title": "Магазин", "path": "views/shop", "version": "1.0", "style": false, "requires": ["money"]}
-]

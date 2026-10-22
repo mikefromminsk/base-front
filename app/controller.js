@@ -1,14 +1,9 @@
-app.controller('main', function ($scope, $rootScope, api, dialog, sheet, plugins) {
+app.controller('main', function ($scope, $rootScope, api, dialog, sheet, plugins, $http) {
 
     $rootScope.market = []
 
     $scope.pluginList = plugins.all()
     $scope.plugins = plugins
-
-
-    api.get('api/plugins.json').then(function (list) {
-        $rootScope.market = list
-    })
 
     $scope.openDialog = function ($event) {
         dialog('dialog', 'views/dialog', {id: 1}, $event).catch(function () {

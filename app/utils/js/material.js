@@ -30,6 +30,7 @@ app.factory('dialog', function ($mdDialog) {
             clickOutsideToClose: true,
             fullscreen: true,
             multiple: true,
+            isolateScope: false,
             locals: {
                 params: params || {}
             }
