@@ -1,14 +1,14 @@
-app.controller('plugins', function ($scope, $mdDialog, plugins, api) {
-
-    var marketUrl = 'api/plugins.json'
+app.controller('plugins', function ($scope, $mdDialog, plugins) {
 
     $scope.items = []
     $scope.query = ''
 
     $scope.search = function (query) {
-        api.get(marketUrl, {q: query}).then(function (list) {
-            $scope.items = list
-        })
+        var text = (query || '').toLowerCase()
+        var list = $scope.market || []
+        $scope.items = text ? list.filter(function (item) {
+            return (item.title + ' ' + item.name).toLowerCase().includes(text)
+        }) : list
     }
 
     $scope.toggle = function (item) {

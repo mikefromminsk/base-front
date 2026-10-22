@@ -1,4 +1,14 @@
-app.controller('main', function ($scope, dialog, sheet, plugins) {
+app.controller('main', function ($scope, $rootScope, api, dialog, sheet, plugins) {
+
+    $rootScope.market = []
+
+    $scope.pluginList = plugins.all()
+    $scope.plugins = plugins
+
+
+    api.get('api/plugins.json').then(function (list) {
+        $rootScope.market = list
+    })
 
     $scope.openDialog = function ($event) {
         dialog('dialog', 'views/dialog', {id: 1}, $event).catch(function () {
@@ -9,8 +19,6 @@ app.controller('main', function ($scope, dialog, sheet, plugins) {
         sheet('sheet', 'views/sheet', {}, $event).catch(function () {
         })
     }
-
-    $scope.plugins = plugins
 
     $scope.openPlugins = function ($event) {
         dialog('plugins', 'views/plugins', {}, $event).catch(function () {

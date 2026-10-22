@@ -1,15 +1,11 @@
 var PLUGINS_STORAGE_ITEM_NAME = 'plugins'
 
 function pluginList() {
-    try {
-        return JSON.parse(localStorage.getItem(PLUGINS_STORAGE_ITEM_NAME) || '[]')
-    } catch (error) {
-        return []
-    }
+    return JSON.parse(localStorage.getItem(PLUGINS_STORAGE_ITEM_NAME) || '[]')
 }
 
 function pluginUrl(item, file) {
-    var path = item.path
+    var path = item.path || 'views/' + item.name
     var root = ''
     if (path.startsWith('http')) {
         root = path
@@ -28,7 +24,7 @@ app.service('plugins', function () {
     }
 
     this.toggle = function (item, on) {
-        var list = pluginList()
+        var list = pluginList().slice()
         if (on) {
             if (!list.some(function (entry) { return entry.name === item.name })) {
                 list.push(item)
@@ -54,22 +50,7 @@ angular.module('app').config(function ($stateProvider) {
     })
 })
 
-function pluginLoad(item) {
-    return new Promise(function (done) {
-        if (item.style !== false) {
-            var style = document.createElement('link')
-            style.rel = 'stylesheet'
-            style.href = pluginUrl(item, 'style.css')
-            document.head.appendChild(style)
-        }
-        var script = document.createElement('script')
-        script.src = pluginUrl(item, 'controller.js')
-        script.onload = function () { done(item) }
-        script.onerror = function () { done(null) }
-        document.head.appendChild(script)
-    })
-}
-
-Promise.all(pluginList().map(pluginLoad)).then(function (loaded) {
-    angular.bootstrap(document.body, ['app'])
+pluginList().forEach(function (item) {
+    document.write('<link rel="stylesheet" href="' + pluginUrl(item, 'style.css') + '">')
+    document.write('<script src="' + pluginUrl(item, 'controller.js') + '"></script>')
 })
