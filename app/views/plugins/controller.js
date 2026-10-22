@@ -58,18 +58,20 @@ pluginList().forEach(function (item) {
 
 app.controller('plugins', function ($scope, $mdDialog, plugins, $http) {
 
-    $scope.items = []
+    $scope.catalog = []
+    $scope.pluginList = []
     $scope.query = ''
     $scope.plugins = plugins
 
     $http.get('/views/info.json').then(function (list) {
-        $scope.pluginList = list.data
+        $scope.catalog = list.data || []
+        $scope.search($scope.query)
     })
 
     $scope.search = function (query) {
         var text = (query || '').toLowerCase()
-        var list = $scope.market || []
-        $scope.items = text ? list.filter(function (item) {
+        var list = $scope.catalog
+        $scope.pluginList = text ? list.filter(function (item) {
             return (item.title + ' ' + item.name + ' ' + (item.description || '')).toLowerCase().includes(text)
         }) : list
     }
