@@ -1,4 +1,4 @@
-app.controller('main', function ($scope, dialog, sheet) {
+app.controller('main', function ($scope, dialog, sheet, plugins) {
 
     $scope.openDialog = function ($event) {
         dialog('dialog', 'views/dialog', {id: 1}, $event).catch(function () {
@@ -9,6 +9,8 @@ app.controller('main', function ($scope, dialog, sheet) {
         sheet('sheet', 'views/sheet', {}, $event).catch(function () {
         })
     }
+
+    $scope.plugins = plugins
 
     $scope.openPlugins = function ($event) {
         dialog('plugins', 'views/plugins', {}, $event).catch(function () {

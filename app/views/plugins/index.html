@@ -5,14 +5,17 @@
     </div>
 
     <div class="flex col scroll p16 gap8">
-        <div class="text5 text-gray">Галочка ставит плагин в список, страница перезагружается и плагин включается</div>
+        <input ng-model="query" ng-change="search(query)" placeholder="Поиск">
 
-        <div class="row acc ph16 pv8 r16 back-gray100 gap8"
+        <div class="row acc p16 r16 back-gray100 gap8"
              ng-repeat="item in items track by item.name">
-            <div class="flex text4">{{item.name}}</div>
-            <input type="checkbox" ng-model="item.enabled" ng-change="toggle(item)">
+            <div class="flex col">
+                <div class="text4">{{item.title}}</div>
+                <div class="text5 text-gray">{{item.name}}</div>
+            </div>
+            <input type="checkbox" ng-checked="plugins.has(item.name)" ng-click="toggle(item)">
         </div>
 
-        <div class="text5 text-gray" ng-if="!items.length">Папок в app/plugins нет</div>
+        <div class="text5 text-gray" ng-if="!items.length">Ничего не найдено</div>
     </div>
 </div>

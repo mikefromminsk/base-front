@@ -42,7 +42,10 @@
     <button class="button2" ng-click="openDialog($event)">Диалог</button>
     <button class="button2" ng-click="openSheet($event)">Лист</button>
     <button class="button2" ng-click="openPlugins($event)">Плагины</button>
-    <button class="button2" ui-sref="{{name}}" ng-repeat="name in plugins">{{name}}</button>
+    <button class="button2" ui-sref="{{plugin.name}}"
+            ng-repeat="plugin in plugins.all()">
+        {{plugin.name}}
+    </button>
 </div>
 
 <div ui-view class="flex col"></div>

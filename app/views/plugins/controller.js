@@ -1,14 +1,23 @@
-app.controller('plugins', function ($scope, $mdDialog, plugins) {
+app.controller('plugins', function ($scope, $mdDialog, plugins, api) {
 
-    $scope.items = plugins.all().map(function (name) {
-        return {name: name, enabled: plugins.has(name)}
-    })
+    var marketUrl = 'api/plugins.json'
+
+    $scope.items = []
+    $scope.query = ''
+
+    $scope.search = function (query) {
+        api.get(marketUrl, {q: query}).then(function (list) {
+            $scope.items = list
+        })
+    }
+
+    $scope.toggle = function (item) {
+        plugins.toggle(item, !plugins.has(item.name))
+    }
 
     $scope.close = function () {
         $mdDialog.cancel()
     }
 
-    $scope.toggle = function (item) {
-        plugins.toggle(item.name, item.enabled)
-    }
+    $scope.search('')
 })

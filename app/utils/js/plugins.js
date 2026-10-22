@@ -1,58 +1,75 @@
-var pluginList = ['hello']
+var PLUGINS_STORAGE_ITEM_NAME = 'plugins'
 
-function pluginEnabled() {
+function pluginList() {
     try {
-        return JSON.parse(localStorage.getItem('plugins') || '[]')
+        return JSON.parse(localStorage.getItem(PLUGINS_STORAGE_ITEM_NAME) || '[]')
     } catch (error) {
         return []
     }
 }
 
-app.service('plugins', function () {
-    this.all = function () { return pluginList }
-    this.has = function (name) { return pluginEnabled().includes(name) }
+function pluginUrl(item, file) {
+    var path = item.path
+    var root = ''
+    if (path.startsWith('http')) {
+        root = path
+        path = ''
+    } else if (path.startsWith('/')) {
+        path = path.substring(1)
+    }
+    return root + path + '/' + file + (item.version ? '?v=' + item.version : '')
+}
 
-    this.toggle = function (name, on) {
-        var list = pluginEnabled()
-        if (on && !list.includes(name)) list.push(name)
-        if (!on) list.splice(list.indexOf(name), 1)
-        localStorage.setItem('plugins', JSON.stringify(list))
+app.service('plugins', function () {
+    this.all = function () { return pluginList() }
+
+    this.has = function (name) {
+        return pluginList().some(function (item) { return item.name === name })
+    }
+
+    this.toggle = function (item, on) {
+        var list = pluginList()
+        if (on) {
+            if (!list.some(function (entry) { return entry.name === item.name })) {
+                list.push(item)
+            }
+        } else {
+            list = list.filter(function (entry) { return entry.name !== item.name })
+        }
+        localStorage.setItem(PLUGINS_STORAGE_ITEM_NAME, JSON.stringify(list))
         location.reload()
     }
 })
 
-var pluginLoad = function (name) {
-    return new Promise(function (done) {
-        var style = document.createElement('link')
-        style.rel = 'stylesheet'
-        style.href = 'views/' + name + '/style.css'
-        document.head.appendChild(style)
+angular.module('app').config(function ($stateProvider) {
+    pluginList().filter(function (item) {
+        return item.page !== false
+    }).forEach(function (item) {
+        $stateProvider.state(item.name, {
+            url: '/' + item.name,
+            templateUrl: pluginUrl(item, 'index.html'),
+            controller: item.name,
+            resolve: {params: function ($stateParams) { return $stateParams }},
+        })
+    })
+})
 
+function pluginLoad(item) {
+    return new Promise(function (done) {
+        if (item.style !== false) {
+            var style = document.createElement('link')
+            style.rel = 'stylesheet'
+            style.href = pluginUrl(item, 'style.css')
+            document.head.appendChild(style)
+        }
         var script = document.createElement('script')
-        script.src = 'views/' + name + '/controller.js'
-        script.onload = function () { done(name) }
+        script.src = pluginUrl(item, 'controller.js')
+        script.onload = function () { done(item) }
         script.onerror = function () { done(null) }
         document.head.appendChild(script)
     })
 }
 
-var pluginNames = pluginEnabled().filter(function (name) { return pluginList.includes(name) })
-
-Promise.all(pluginNames.map(pluginLoad)).then(function (loaded) {
-    var module = angular.module('app')
-
-    module.config(function ($stateProvider) {
-        loaded.filter(Boolean).forEach(function (name) {
-            $stateProvider.state(name, {
-                url: '/' + name,
-                templateUrl: 'views/' + name + '/index.html',
-                controller: name,
-                resolve: {params: ['$stateParams', function (stateParams) { return stateParams }]},
-            })
-        })
-    })
-
-    module.run(function ($rootScope) { $rootScope.plugins = pluginNames })
-
+Promise.all(pluginList().map(pluginLoad)).then(function (loaded) {
     angular.bootstrap(document.body, ['app'])
 })
