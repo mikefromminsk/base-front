@@ -46,14 +46,6 @@ body, button, input, textarea, select {
     font-weight: 300;
 }
 
-.avatar {
-    overflow: hidden;
-}
-
-.header {
-    border-bottom: 1px solid var(--gray200);
-}
-
 .dialog {
     background-color: var(--black);
     color: var(--white);

@@ -137,8 +137,7 @@ button{
 }
 
 button:active:not([disabled]),
-.button:active:not([disabled]),
-.button2:active:not([disabled]) {
+.button:active:not([disabled]) {
     color: var(--gray400);
     background: var(--gray200);
 }
@@ -154,10 +153,8 @@ button:active:not([disabled]),
 
 button[disabled],
 .button[disabled],
-.button2[disabled],
 form[disabled] button,
-form[disabled] .button,
-form[disabled] .button2{
+form[disabled] .button{
     color: var(--gray400);
     background: var(--gray200);
     cursor: default;

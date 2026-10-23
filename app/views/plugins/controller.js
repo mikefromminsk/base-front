@@ -1,4 +1,5 @@
 var PLUGINS_STORAGE_ITEM_NAME = 'plugins'
+var PLUGINS_STORE_URL = 'http://localhost:8080/views/views/info.json'
 
 function pluginList() {
     return JSON.parse(localStorage.getItem(PLUGINS_STORAGE_ITEM_NAME) || '[]')
@@ -64,7 +65,7 @@ app.controller('plugins', function ($scope, $mdDialog, plugins, $http) {
     $scope.query = ''
     $scope.plugins = plugins
 
-    $http.get('/views/info.json').then(function (list) {
+    $http.get(PLUGINS_STORE_URL).then(function (list) {
         $scope.catalog = list.data || []
         $scope.search($scope.query)
     })

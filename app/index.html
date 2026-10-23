@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="icon/logo.svg">
 
-    <link rel="stylesheet" href="utils/css/colors-theme.css">
     <link rel="stylesheet" href="utils/css/colors.css">
-    <link rel="stylesheet" href="utils/css/base.css">
-    <link rel="stylesheet" href="utils/css/animation.css">
+    <link rel="stylesheet" href="utils/css/style-base.css">
+    <link rel="stylesheet" href="utils/css/anim.css">
     <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
-    <link rel="stylesheet" href="utils/css/style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="utils/css/shorts.css">
 
     <script src="node_modules/angular/angular.min.js"></script>
@@ -23,7 +22,7 @@
     <script src="app.js"></script>
     <script src="utils/js/root.js"></script>
     <script src="utils/js/api.js"></script>
-    <script src="utils/js/material.js"></script>
+    <script src="services.js"></script>
     <script src="controller.js"></script>
     <script src="views/one/controller.js"></script>
     <script src="views/two/controller.js"></script>
@@ -34,7 +33,7 @@
 
 <body class="col back-black text-white fill" ng-app="app" ng-controller="main">
 
-<div class="row acc ph16 pv16 gap8 header">
+<div class="row acc ph16 pv16 gap8">
     <img class="img-white img24" src="icon/logo.svg">
     <div class="flex text3">Шаблон</div>
     <button class="button2" ui-sref="one">Страница один</button>
