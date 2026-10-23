@@ -14,9 +14,9 @@
                 <div class="text5 text-gray">{{item.name}}</div>
                 <div class="text5 text-gray" ng-if="item.description">{{item.description}}</div>
             </div>
-            <input type="checkbox" ng-checked="plugins.has(item.name)" ng-click="toggle(item)">
+            <input type="checkbox" ng-checked="plugins.has(item.name)" ng-click="plugins.toggle(item.name)">
         </div>
 
-        <div class="text5 text-gray" ng-if="!pluginList.length">Ничего не найдено</div>
+        <div class="text5 text-gray" ng-if="!catalog.length">Ничего не найдено</div>
     </div>
 </div>

@@ -7,11 +7,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
             templateUrl: 'views/one/index.html',
             controller: 'one',
         })
-        .state('two', {
-            url: '/two',
-            templateUrl: 'views/two/index.html',
-            controller: 'two',
-        })
 
     $urlRouterProvider.otherwise('/one')
     $locationProvider.hashPrefix('')

@@ -1,10 +1,5 @@
 [
   {
-    "name": "one",
-    "title": "Первый",
-    "description": "Демо первый."
-  },
-  {
     "name": "two",
     "title": "Второй",
     "description": "Демо второй."
