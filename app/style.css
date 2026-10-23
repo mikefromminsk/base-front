@@ -1,13 +1,13 @@
-@font-face {
+/*@font-face {
     font-family: 'Inter';
-    src: url('/utils/fonts/Inter_18pt-Medium.ttf') format('truetype');
+    src: url('/fonts/Inter_18pt-Medium.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 body, button, input, textarea, select {
     font-family: 'Inter', monospace !important;
-}
+}*/
 
 .text0 {
     font-size: 50px;
