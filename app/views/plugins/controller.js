@@ -54,7 +54,7 @@ app.controller('plugins', function ($scope, $mdDialog, plugins, $http) {
     $scope.plugins = plugins
     $scope.pluginList = plugins.all()
 
-    $http.get(PLUGINS_STORE_URL + "/plugins/info.json").then(function (response) {
+    $http.get(plugins.url() + "/plugins/info.json").then(function (response) {
         $scope.catalog = response.data || []
         $scope.search()
     })
